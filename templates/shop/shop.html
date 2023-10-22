@@ -3,5 +3,58 @@
 {% block title %}Shopbongban{% endblock %}
 
 {% block content %}
+<div class="header text-center mt-5">
+    {% if user.is_authenticated %}
+    <h1>Welcome, {{ user.get_username }}. Thanks for logging in.</h1>
+    {% else %}
+    <h1>Welcome to Shopbongban</h1>
+    {% endif %}
+</div>
 
+<div class="danhmuc">
+    <div class="container">
+
+        <div class="row pt-3 pb-3" style="background-color: #F5F5F5; border-radius: 7px;">
+            <h4>Danh mục</h4>
+            {% for Infocategory in Infocategory %}
+            <div class="col-2">
+                <a href="" style="text-decoration: none; ">
+                    <div class="out" style="border: 1px solid #000; border-radius: 5px; background-color: #fff!important;">
+                        {% if Infocategory.image %}
+                        <div class="text-center mb-2" >
+                            <img src="{{Infocategory.image.url}}"  alt="First view of {{Infocategory.title}}" style="max-height:100px;"/>
+                        </div>
+
+                        {% endif %}
+                        <div class="text-center">
+                            <p>{{Infocategory.name}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="row pt-3 pb-3 mt-5" style="background-color: #F5F5F5; border-radius: 7px;">
+            <h4>Sản phẩm gợi ý</h4>
+            {% for Infoproduct in Infoproduct %}
+            <div class="col-2">
+                <a href="{% url 'product' %}?id={{ Infoproduct.id }}" style="text-decoration: none; ">
+                    <div class="out" style="border: 1px solid #000; border-radius: 5px; background-color: #fff!important;">
+                        {% if Infoproduct.image %}
+                        <div class="text-center mb-2" >
+                            <img src="{{Infoproduct.image.url}}"  alt="First view of {{Infoproduct.title}}" style="max-height:100px;"/>
+                        </div>
+
+                        {% endif %}
+                        <div class="text-center">
+                            <p>{{Infoproduct.name}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

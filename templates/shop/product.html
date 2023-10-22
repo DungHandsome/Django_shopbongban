@@ -1,0 +1,29 @@
+{% extends '../base.html' %}
+
+{% block title %}{% for Infoproduct in Infoproduct %}{{ Infoproduct.name }}{% endfor %} | Shopbongban{% endblock %}
+
+{% block content %}
+<div class="header mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                {% for Infoproduct in Infoproduct %}
+                {% if Infoproduct.image %}
+                <img src="{{Infoproduct.image.url}}"  alt="First view of {{Infoproduct.title}}" style="width: 100%;"/>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-8">
+                {% for Infoproduct in Infoproduct %}
+                <h2>{{ Infoproduct.name }}</h2><br>
+                <h4>Chi tiết sản phẩm</h4>
+                <p>{{ Infoproduct.detail|linebreaks }}</p>
+                {% endfor %}
+            </div>
+            
+            
+        </div>
+    </div>
+    
+</div>
+{% endblock %}
