@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import *
+from .models import Category, product
 # Create your views here.
 def shop(request):
     Infocategory = Category.objects.all().order_by('name')
@@ -10,7 +10,11 @@ def shop(request):
     }
     return render(request, 'shop/shop.html', context)
 
-def products(request):
-    id = request.GET.get('id')
-    Infoproduct = product.objects.filter(id=id)
+def products(request, id):
+    Infoproduct = product.objects.get(id=id)
     return render(request, 'shop/product.html', {"Infoproduct" : Infoproduct})
+
+def categories(request, slug):
+    Infocategory = Category.objects.get(slug=slug)
+    Infoproduct = product.objects.filter(categery__slug=slug)
+    return render(request, 'shop/category.html', {"Infocategory" : Infocategory, "Infoproduct" : Infoproduct})

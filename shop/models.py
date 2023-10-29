@@ -10,7 +10,7 @@ class Category(models.Model):
     
 
 class product(models.Model):
-    categery = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    categery = models.ForeignKey(Category,related_name='products' , on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=1000)
     detail = models.TextField()
     price = models.IntegerField(default=0)

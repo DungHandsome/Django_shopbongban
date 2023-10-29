@@ -1,0 +1,9 @@
+{% extends '../base.html' %}
+
+{% block title %}{{ Infocategory.name }} | Shopbongban{% endblock %}
+
+{% block content %}
+{% for Infoproduct in Infoproduct %}
+<h1>{{Infoproduct.name}}</h1>
+{% endfor %}
+{% endblock %}

@@ -1,29 +1,34 @@
 {% extends '../base.html' %}
 
-{% block title %}{% for Infoproduct in Infoproduct %}{{ Infoproduct.name }}{% endfor %} | Shopbongban{% endblock %}
+{% block title %}{{ Infoproduct.name }} | Shopbongban{% endblock %}
 
 {% block content %}
-<div class="header mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                {% for Infoproduct in Infoproduct %}
+
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
                 {% if Infoproduct.image %}
-                <img src="{{Infoproduct.image.url}}"  alt="First view of {{Infoproduct.title}}" style="width: 100%;"/>
+                <img class="card-img-top mb-5 mb-md-0" src="{{Infoproduct.image.url}}" alt="..." />
                 {% endif %}
-                {% endfor %}
             </div>
-            <div class="col-md-8">
-                {% for Infoproduct in Infoproduct %}
-                <h2>{{ Infoproduct.name }}</h2><br>
-                <h4>Chi tiết sản phẩm</h4>
-                <p>{{ Infoproduct.detail|linebreaks }}</p>
-                {% endfor %}
+            <div class="col-md-6">
+                <div class="small mb-1">Id: {{Infoproduct.id}}</div>
+                <h1 class="display-5 fw-bolder">{{ Infoproduct.name }}</h1>
+                <div class="fs-5 mb-5">
+                    <span>{{ Infoproduct.price }}₫</span>
+                </div>
+                <p class="lead">{{ Infoproduct.detail|linebreaks }}</p>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 5rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        Add to cart
+                    </button>
+                </div>
             </div>
-            
-            
         </div>
     </div>
-    
-</div>
+</section>
 {% endblock %}

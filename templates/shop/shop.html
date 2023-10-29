@@ -11,14 +11,14 @@
     {% endif %}
 </div>
 
-<div class="danhmuc">
+<div class="danhmuc mb-5">
     <div class="container">
 
         <div class="row pt-3 pb-3" style="background-color: #F5F5F5; border-radius: 7px;">
             <h4>Danh mục</h4>
             {% for Infocategory in Infocategory %}
             <div class="col-2">
-                <a href="" style="text-decoration: none; ">
+                <a href="{% url 'category' Infocategory.slug %}" style="text-decoration: none; ">
                     <div class="out" style="border: 1px solid #000; border-radius: 5px; background-color: #fff!important;">
                         {% if Infocategory.image %}
                         <div class="text-center mb-2" >
@@ -35,26 +35,48 @@
             {% endfor %}
         </div>
 
-        <div class="row pt-3 pb-3 mt-5" style="background-color: #F5F5F5; border-radius: 7px;">
-            <h4>Sản phẩm gợi ý</h4>
-            {% for Infoproduct in Infoproduct %}
-            <div class="col-2">
-                <a href="{% url 'product' %}?id={{ Infoproduct.id }}" style="text-decoration: none; ">
-                    <div class="out" style="border: 1px solid #000; border-radius: 5px; background-color: #fff!important;">
-                        {% if Infoproduct.image %}
-                        <div class="text-center mb-2" >
-                            <img src="{{Infoproduct.image.url}}"  alt="First view of {{Infoproduct.title}}" style="max-height:100px;"/>
-                        </div>
+            
+            
+            
+            
+        </div>
+    </div>
+</div>
 
-                        {% endif %}
+<section>
+    <div class="container pt-3" style="background-color: #F5F5F5; border-radius: 7px;">
+        <h4>Sản phẩm gợi ý</h4>
+        <div class="row gx-6 gx-lg-6 row-cols-2 row-cols-md-3 row-cols-xl-6 ">
+            {% for Infoproduct in Infoproduct %}
+            <div class="col-md-2 mb-5">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    {% if Infoproduct.image %}
+                    <img class="card-img-top" src="{{Infoproduct.image.url}}" alt="..."/>
+                    {% endif %}
+                    <!-- Product details-->
+                    <div class="card-body p-4">
                         <div class="text-center">
-                            <p>{{Infoproduct.name}}</p>
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">
+                                {% if Infoproduct.name|length > 18 %}
+                                {{Infoproduct.name|slice:"18"}}...
+                                {% else %}
+                                {{Infoproduct.name}}
+                                {% endif %}
+                            </h5>
+                            <!-- Product price-->
+                            {{ Infoproduct.price }}₫
                         </div>
                     </div>
-                </a>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' Infoproduct.id %}">Read more...</a></div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
-</div>
+</section>
 {% endblock %}
